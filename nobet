@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ağustos 2025 Nöbet Takvimi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .calendar th, .calendar td {
+            border: 2px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+            padding: 8px;
+            height: 120px;
+            width: 14.28%;
+        }
+        .calendar th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            height: 40px;
+            font-size: 1.1em;
+        }
+        .day-number {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        .doctors {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .doctors li {
+            background-color: #3498db;
+            color: white;
+            padding: 4px 6px;
+            margin: 2px 0;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .pediatrist-note {
+            background-color: #e74c3c;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-top: 2px;
+            text-align: center;
+        }
+        .empty-cell {
+            background-color: #ecf0f1;
+        }
+        /* Weekend styling - warm colors */
+        .weekend {
+            background-color: #fdf2e9 !important;
+            border-left: 4px solid #e67e22 !important;
+        }
+        .weekend .day-number {
+            color: #d35400;
+        }
+        .weekend .doctors li {
+            background-color: #e67e22;
+        }
+        /* Weekday styling - cool colors */
+        .weekday {
+            background-color: #eaf2f8 !important;
+            border-left: 4px solid #3498db !important;
+        }
+        .weekday .day-number {
+            color: #2980b9;
+        }
+        /* Single person day styling */
+        .single-person {
+            background-color: #fdedec !important;
+            border: 3px dashed #e74c3c !important;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid #3498db;
+        }
+        .summary h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        .stat-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        .legend-weekend {
+            background-color: #fdf2e9;
+            border: 2px solid #e67e22;
+            color: #d35400;
+        }
+        .legend-weekday {
+            background-color: #eaf2f8;
+            border: 2px solid #3498db;
+            color: #2980b9;
+        }
+        .legend-single {
+            background-color: #fdedec;
+            border: 3px dashed #e74c3c;
+            color: #c0392b;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .summary-table th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+        .summary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .summary-table td.doc-name {
+            text-align: left;
+            font-weight: 500;
+        }
+        .highlight-green { color: #27ae60; font-weight: bold; }
+        .highlight-red { color: #c0392b; font-weight: bold; }
+        .highlight-easy { background-color: #e8f8f5; }
+        .highlight-hard { background-color: #fdedec; }
+        @media print {
+            body { margin: 0; }
+            .container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Ağustos 2025 Nöbet Takvimi</h1>
+        
+        <div class="legend">
+            <div class="legend-item legend-weekday">
+                📅 Hafta İçi (En az 1 kişi)
+            </div>
+            <div class="legend-item legend-weekend">
+                🎯 Hafta Sonu (En az 2 kişi)
+            </div>
+            <div class="legend-item legend-single">
+                👶 +1 Pediatrist Gerekli
+            </div>
+        </div>
+        
+        <table class="calendar">
+            <thead>
+                <tr>
+                    <th>Pazartesi</th>
+                    <th>Salı</th>
+                    <th>Çarşamba</th>
+                    <th>Perşembe</th>
+                    <th>Cuma</th>
+                    <th>Cumartesi</th>
+                    <th>Pazar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="empty-cell"></td>
+                    <td class="weekday single-person">
+                        <div class="day-number">1</div>
+                        <ul class="doctors">
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">2</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Kadir Kaan Zengin</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">3</div>
+                        <ul class="doctors">
+                            <li>Dr. Okan KÜÇÜK</li>
+                            <li>sadık barış adıgüzel</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="weekday single-person">
+                        <div class="day-number">4</div>
+                        <ul class="doctors">
+                            <li>Kadir Kaan Zengin</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">5</div>
+                        <ul class="doctors">
+                            <li>Suzan Okansoy</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">6</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>sadık barış adıgüzel</li>
+                        </ul>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">7</div>
+                        <ul class="doctors">
+                            <li>Dr. Okan KÜÇÜK</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">8</div>
+                        <ul class="doctors">
+                            <li>Fırat Atar</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">9</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>Kadir Kaan Zengin</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">10</div>
+                        <ul class="doctors">
+                            <li>Dr. Okan KÜÇÜK</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="weekday">
+                        <div class="day-number">11</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>sadık barış adıgüzel</li>
+                        </ul>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">12</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">13</div>
+                        <ul class="doctors">
+                            <li>Dr. Okan KÜÇÜK</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">14</div>
+                        <ul class="doctors">
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">15</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">16</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">17</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="weekday">
+                        <div class="day-number">18</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>sadık barış adıgüzel</li>
+                        </ul>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">19</div>
+                        <ul class="doctors">
+                            <li>Kadir Kaan Zengin</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">20</div>
+                        <ul class="doctors">
+                            <li>sadık barış adıgüzel</li>
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">21</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">22</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">23</div>
+                        <ul class="doctors">
+                            <li>Kadir Kaan Zengin</li>
+                            <li>Fırat Atar</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">24</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                            <li>sadık barış adıgüzel</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="weekday single-person">
+                        <div class="day-number">25</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">26</div>
+                        <ul class="doctors">
+                            <li>Kadir Kaan Zengin</li>
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">27</div>
+                        <ul class="doctors">
+                            <li>sadık barış adıgüzel</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday single-person">
+                        <div class="day-number">28</div>
+                        <ul class="doctors">
+                            <li>Musa Nas</li>
+                        </ul>
+                        <div class="pediatrist-note">+1 Pediatrist</div>
+                    </td>
+                    <td class="weekday">
+                        <div class="day-number">29</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Kadir Kaan Zengin</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">30</div>
+                        <ul class="doctors">
+                            <li>sadık barış adıgüzel</li>
+                            <li>Suzan Okansoy</li>
+                        </ul>
+                    </td>
+                    <td class="weekend">
+                        <div class="day-number">31</div>
+                        <ul class="doctors">
+                            <li>Abdullah Petek</li>
+                            <li>Kadir Kaan Zengin</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="summary">
+            <h2>📊 Ağustos 2025 Detaylı Analiz Raporu</h2>
+            
+            <!-- FAZLA MESAİ TABLOSU -->
+            <div class="table-responsive">
+                <h3>⏰ Fazla Mesai Hesaplaması</h3>
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Doktor</th>
+                            <th>H.İçi Nöbet Sayısı</th>
+                            <th>H.Sonu Nöbet Sayısı</th>
+                            <th>Toplam Mesai (Saat)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="doc-name">Musa Nas</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>152 saat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Dr. Okan KÜÇÜK</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>80 saat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Abdullah Petek</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>152 saat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Kadir Kaan Zengin</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>160 saat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">sadık barış adıgüzel</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>152 saat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Suzan Okansoy</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>144 saat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Fırat Atar</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>152 saat</td>
+                        </tr>
+
+                        <tr style="font-weight: bold;">
+                            <td class="doc-name">TOPLAM</td>
+                            <td colspan="2"></td>
+                            <td>992 saat</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <small style="display: block; text-align: right; margin-top: 5px;">*H.İçi: 16 saat, H.Sonu: 24 saat</small>
+            </div>
+
+            <!-- TERCİH UYUM TABLOSU -->
+            <div class="table-responsive">
+                <h3>✅ Tercih Uyum Raporu (Pozitif İstekler: 46 / 36 - %78.3)</h3>
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Doktor</th>
+                            <th>Karşılanan Pozitif Günler</th>
+                            <th>İhlal Edilen Negatif Günler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="doc-name">Musa Nas</td>
+                            <td class="highlight-green">6, 9, 11, 16, 18, 21, 28</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Dr. Okan KÜÇÜK</td>
+                            <td class="highlight-green">3, 7, 10</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Abdullah Petek</td>
+                            <td class="highlight-green">12, 15, 17, 22, 29, 31</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Kadir Kaan Zengin</td>
+                            <td class="highlight-green">2, 9, 19, 26, 29, 31</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">sadık barış adıgüzel</td>
+                            <td class="highlight-green">30</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Suzan Okansoy</td>
+                            <td class="highlight-green">1, 14, 16, 20, 26, 30</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Fırat Atar</td>
+                            <td class="highlight-green">5, 8, 12, 15, 17, 21, 23</td>
+                            <td class="highlight-red">✅ Yok</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- İŞ YÜKÜ DENGELEME MANTIĞI -->
+            <div class="table-responsive">
+                <h3>⚖️ İş Yükü Dengeleme Mantığı (Neden Bu Liste Böyle?)</h3>
+                <p style="font-size: 0.9em; text-align: center;">Bu tablo, Temmuz ayındaki iş yüküne göre Ağustos ayında doktorların neden "Zor" veya "Kolay" günlere atandığını açıklar.<br>
+                <span class="highlight-hard">Zor Günler: Hafta Sonu + Tek Kişilik Hafta İçi</span> | 
+                <span class="highlight-easy">Kolay Günler: Çift Kişilik Hafta İçi</span>
+                </p>
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Doktor</th>
+                            <th>Temmuz Durumu</th>
+                            <th>Ağustos Hedefi</th>
+                            <th>Ağustos Sonucu (Zor/Kolay)</th>
+                            <th>Değerlendirme</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td class="doc-name">Musa Nas</td>
+                            <td class="highlight-hard">Zor Çalıştı (%33)</td>
+                            <td>Kolay Günler Öncelikli</td>
+                            <td>4 Zor / 4 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Dr. Okan KÜÇÜK</td>
+                            <td class="highlight-easy">Kolay Çalıştı (%67)</td>
+                            <td>Zor Günler Öncelikli</td>
+                            <td>4 Zor / 0 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Abdullah Petek</td>
+                            <td class="highlight-hard">Zor Çalıştı (%33)</td>
+                            <td>Kolay Günler Öncelikli</td>
+                            <td>4 Zor / 4 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Kadir Kaan Zengin</td>
+                            <td class="highlight-easy">Kolay Çalıştı (%67)</td>
+                            <td>Zor Günler Öncelikli</td>
+                            <td>6 Zor / 2 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">sadık barış adıgüzel</td>
+                            <td class="highlight-hard">Zor Çalıştı (%33)</td>
+                            <td>Kolay Günler Öncelikli</td>
+                            <td>4 Zor / 4 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Suzan Okansoy</td>
+                            <td class="highlight-hard">Zor Çalıştı (%44)</td>
+                            <td>Kolay Günler Öncelikli</td>
+                            <td>4 Zor / 4 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                        <tr>
+                            <td class="doc-name">Fırat Atar</td>
+                            <td class="highlight-hard">Zor Çalıştı (%44)</td>
+                            <td>Kolay Günler Öncelikli</td>
+                            <td>4 Zor / 4 Kolay</td>
+                            <td class="highlight-green">✅ Başarılı</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; color: #7f8c8d; font-size: 0.9em;">
+            <p>📅 Ağustos 2025 Nöbet Takvimi - Gelişmiş Optimizasyon ile Oluşturuldu</p>
+            <p>🕒 Oluşturulma Tarihi: 28.07.2025 03:40</p>
+        </div>
+    </div>
+</body>
+</html>
